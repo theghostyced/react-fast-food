@@ -8,6 +8,7 @@ import swal from 'sweetalert';
 import './Login.css';
 import loginActions from './actions/auth';
 import foodTruck from '../../styles/img/food-truck.png';
+import decodeToken from '../../helpers/utils';
 
 /**
  * @class
@@ -32,6 +33,8 @@ export class Login extends Component {
    */
   componentDidMount() {
     document.body.style.backgroundColor = '#580072';
+    const isAuthenticated = decodeToken();
+    if (!isAuthenticated) this.props.history.push('/login');
   }
 
   /**

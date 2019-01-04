@@ -46,13 +46,14 @@
     ],
     "max-len": [
       "error",
-      80,
+      150,
       2
     ],
     "new-cap": "error",
     "no-param-reassign": "off",
     "no-trailing-spaces": "warn",
     "no-underscore-dangle": "error",
+    "comma-dangle": "off",
     "one-var": "off",
     "one-var-declaration-per-line": "off",
     "prefer-const": "warn",

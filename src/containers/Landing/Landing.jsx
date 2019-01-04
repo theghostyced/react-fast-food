@@ -4,7 +4,9 @@ import {
   Navbar,
   Hero,
   Card,
+  SideNav,
 } from '../../components/shared';
+import decodeToken from '../../helpers/utils';
 
 /**
  * @class
@@ -19,17 +21,25 @@ export default class Landing extends Component {
 
     this.state = {
       menus: [1, 2, 3, 4, 5, 6],
+      isAuthenicated: !!decodeToken(),
     };
+  }
+
+  /**
+   * @returns{void}
+   */
+  componentDidMount() {
+    document.body.style.backgroundColor = '#FFF';
   }
 
   /**
    * @returns {JSX} Landing JSX
    */
   render() {
-    const { menus } = this.state;
+    const { menus, isAuthenicated } = this.state;
     return (
       <Fragment>
-        <Navbar />
+        <Navbar isAuthenicated={isAuthenicated}/>
         <Hero />
         <section className="section wrapper">
           <div className="section__inner">
@@ -66,6 +76,11 @@ export default class Landing extends Component {
             </div>
           </div>
         </section>
+        <SideNav>
+          <Link to="/">Home</Link>
+          <Link to="/order">Orders</Link>
+          <Link to="/history">History</Link>
+        </SideNav>
         <footer className="bg-dark text--white text--center">
           <p>Copyrights @ 2018</p>
         </footer>

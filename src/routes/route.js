@@ -2,6 +2,7 @@ import {
   Login,
   Landing,
   Signup,
+  OrderView,
 } from '../containers';
 
 
@@ -17,6 +18,10 @@ const routes = [
   {
     path: '/signup',
     component: Signup,
+  },
+  {
+    path: '/order',
+    component: OrderView,
   },
 ];
 

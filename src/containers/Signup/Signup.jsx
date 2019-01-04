@@ -7,11 +7,24 @@ import swal from 'sweetalert';
 import './Signup.css';
 import foodTruck from '../../styles/img/food-truck.png';
 import signupActions from './actions/signup';
+import decodeToken from '../../helpers/utils';
 
 /**
  * @class
  */
 export class Signup extends Component {
+  /**
+   *
+   * @param {object} props
+   */
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      isAuthenicated: !!decodeToken(),
+    };
+  }
+
   static propTypes = {
     error: PropTypes.bool,
     errorMessage: PropTypes.string,
@@ -43,6 +56,8 @@ export class Signup extends Component {
    */
   componentDidMount() {
     document.body.style.backgroundColor = '#580072';
+    const isAuthenticated = decodeToken();
+    if (!isAuthenticated) this.props.history.push('/login');
   }
 
   /**

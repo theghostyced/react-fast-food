@@ -2,10 +2,10 @@
 jest.mock('../../../helpers/utils/decodeToken');
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Login, mapStateToProps, mapDispatchToProps } from '../Login.jsx';
+import { Signup, mapStateToProps, mapDispatchToProps } from '../Signup.jsx';
 import decodeToken from '../../../helpers/utils/decodeToken';
 
-describe('Login Component Test', () => {
+describe('Signup Component Test', () => {
   let wrapper;
   const pushSpy = jest.fn();
   const preventDefaultSpy = jest.fn();
@@ -14,10 +14,10 @@ describe('Login Component Test', () => {
     history: {
       push: pushSpy,
     },
-    loginDispatcher: dispatcherSpy,
+    signupDispatcher: dispatcherSpy,
   };
   beforeEach(() => {
-    wrapper = shallow(<Login {...props}/>);
+    wrapper = shallow(<Signup {...props}/>);
   });
 
   it('should have the email input field to have rendered', () => {

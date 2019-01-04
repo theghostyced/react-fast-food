@@ -21,7 +21,7 @@ const signupDispatcher = (userData, history) => (dispatch) => {
     .then((res) => {
       localStorage.setItem('token', res.data.token);
       dispatch(signupSuccess(res.data));
-      history.push('/');
+      history.push('/order');
     })
     .catch((err) => { dispatch(signupFailed(err)); });
 };

@@ -1,12 +1,12 @@
+/* eslint-disable max-len */
 import { Route } from 'react-router-dom';
 import React, { Fragment } from 'react';
 import routes from './route';
 
-const route = (
+const router = (
   <Fragment>
-    {routes.map((route, i) => <Route key={i} path={route.path} component={route.component} exact={true}/>
-  )}
+    {routes.map((route, i) => <Route key={i} path={route.path} component={route.component} exact={true}/>)}
   </Fragment>
 );
 
-export default route;
+export default router;
