@@ -36,11 +36,6 @@ const HWP = new HtmlWebpackPlugin({
   filename: `${BUILD_DIR}/index.html`,
 });
 
-// Webpack CommonsChunk Plugin
-const COMMONS_CHUNK = webpack.optimize.CommonsChunkPlugin({
-  names: ['vendor', 'mainfest'],
-});
-
 // Instance of the CleanWebpackPlugin
 const CLEANPLUGIN = new CleanWebpackPlugin(filesToClean);
 
@@ -48,7 +43,7 @@ const CLEANPLUGIN = new CleanWebpackPlugin(filesToClean);
 
 module.exports = {
   entry: {
-    bundle: `${APP_URL}/root.js`,
+    bundle: `${APP_URL}/root.jsx`,
     vendor: VENDOR_LIBS,
   },
   output: {
@@ -74,7 +69,10 @@ module.exports = {
   },
   plugins: [
     HWP,
-    COMMONS_CHUNK,
     CLEANPLUGIN,
   ],
+  devServer: {
+    compress: true,
+    contentBase: BUILD_DIR,
+  },
 };

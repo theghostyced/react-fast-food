@@ -12,10 +12,12 @@ const scssTest = /\.scss$/;
 module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
-  rules: [
-    {
-      test: scssTest,
-      use: ['style-loader', 'css-loader', 'sass-loader'],
-    },
-  ],
+  module: {
+    rules: [
+      {
+        test: scssTest,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+    ],
+  },
 });
