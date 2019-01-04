@@ -1,12 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import routes from './routes';
+import store from './store';
+import './styles/css/ionicons.min.css'
+import './styles/css/core.min.css';
+import './styles/css/toast.min.css';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Root extends Component {
   render() {
-    return <p>Hello React!</p>;
+    return (
+      <Provider store={store}>
+        <BrowserRouter>
+          <Fragment>
+            <Switch>
+              {routes}
+            </Switch>
+          </Fragment>
+      </BrowserRouter>
+      </Provider>
+    )
   }
 }
 
-// eslint-disable-next-line no-undef
 render(<Root />, document.getElementById('app-mount'));

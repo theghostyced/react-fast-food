@@ -1,0 +1,10 @@
+/* Font Faces */
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('./fonts/proximanova-regular.a7942249.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Mirza';
+  src: url('./fonts/Mirza/Mirza-SemiBold.ttf') format('truetype');
+}
