@@ -15,7 +15,7 @@ const jsTest = /\.(js|jsx)$/;
 // CSS test regex
 const cssTest = /\.css$/;
 // Image test regex
-const imgTest = /\.(png|jpg|jpeg|gif|svg)$/i;
+const imgTest = /\.(png|jpg|jpeg|gif|svg|woff|ttf|eot)$/i;
 // Files to clean
 const filesToClean = [
   'dist',
@@ -49,6 +49,7 @@ module.exports = {
   output: {
     path: BUILD_DIR,
     filename: '[name].[chunkhash].js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -74,5 +75,7 @@ module.exports = {
   devServer: {
     compress: true,
     contentBase: BUILD_DIR,
+    historyApiFallback: true,
   },
+  resolve: { extensions: ['.js', '.jsx'] }
 };
