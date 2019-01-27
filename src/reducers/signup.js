@@ -27,7 +27,7 @@ const updateSignupFailedState = (state, action) => stateUpdate(state, {
 const signupReducer = (state = initialState, action) => {
   switch (action.type) {
     case type.SIGNUP_START:
-      return stateUpdate(initialState, signupStartState);
+      return stateUpdate(state, signupStartState);
 
     case type.SIGNUP_FAILED:
       return updateSignupFailedState(state, action);

@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const merge = require('webpack-merge'); // Merge our common and dev config files.
 const path = require('path');
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
 const common = require('./webpack.config');
@@ -50,5 +51,10 @@ module.exports = merge(common, {
       },
     },
   },
-  plugins: [scssPlugin],
+  plugins: [
+    scssPlugin,
+    new webpack.DefinePlugin({
+      'process.env.SERVER_API': JSON.stringify('https://fast-foo.herokuapp.com/api/v1')
+    }),
+  ],
 });

@@ -6,6 +6,14 @@ import minusBtn from '../../../styles/img/minus.svg';
 
 const CartItem = props => (
   <div className="cart__item" data-id={props.id}>
+    {
+      props.cartPage
+      && <div className="button-group">
+      <span
+      className="ion-ios-close remove-item"
+      onClick={props.removeItem}></span>
+    </div>
+    }
     <div className="cart__image">
         <img src={props.imageUrl}/>
     </div>
@@ -28,8 +36,7 @@ const CartItem = props => (
         <input
           type="text"
           name="qty"
-          defaultValue="0"
-          onChange={props.quantity}
+          defaultValue={props.quantity || 0}
         />
         <button
           type="button"
@@ -41,11 +48,14 @@ const CartItem = props => (
     </div>
     <div className="cart__item-total-price">&#8358; {props.price}</div>
     <div className="cart__add-to-cart">
-      <Link
+      {
+        !props.cartPage
+        && <Link
         to="#"
         className="button button--secondary button--radius"
         onClick={props.addItemToCart}
       >Add</Link>
+      }
     </div>
   </div>
 );
@@ -54,11 +64,13 @@ CartItem.propTypes = {
   addItemToCart: PropTypes.func,
   increment: PropTypes.func,
   decrement: PropTypes.func,
-  quantity: PropTypes.string,
+  quantity: PropTypes.any,
   imageUrl: PropTypes.string,
   price: PropTypes.number,
   id: PropTypes.number,
   name: PropTypes.string,
+  removeItem: PropTypes.func,
+  cartPage: PropTypes.bool,
 };
 
 export default CartItem;

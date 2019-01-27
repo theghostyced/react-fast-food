@@ -8,8 +8,13 @@ import './styles/css/ionicons.min.css'
 import './styles/css/core.min.css';
 import './styles/css/toast.min.css';
 
-// eslint-disable-next-line react/prefer-stateless-function
+/**
+ * @class
+ */
 class Root extends Component {
+  /**
+   * @returns {JSX} JSX
+   */
   render() {
     return (
       <Provider store={store}>
