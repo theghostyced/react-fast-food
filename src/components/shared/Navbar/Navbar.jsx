@@ -1,11 +1,26 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 /**
  * @class
  */
-export default class Navbar extends Component {
-  
+export class Navbar extends Component {
+  static propTypes = {
+    isAuthenicated: PropTypes.bool.isRequired,
+    totalPrice: PropTypes.number,
+  }
+
+  /**
+   * @returns {void}
+   * @param {object} e
+   */
+  openSideNav(e) {
+    e.preventDefault();
+    document.getElementById('js-side-nav').style.width = '250px';
+  }
+
   /**
    * @returns {JSX} Navbar JSX
    */
@@ -17,19 +32,30 @@ export default class Navbar extends Component {
             <div className="nav__logo">
               <p><i className="nav__logo--icon"></i>Fast<span>Food</span></p>
             </div>
-            <ul className="nav__links">
+            {
+              !this.props.isAuthenicated
+                ? <ul className="nav__links">
               <li><Link to="/">Home</Link></li>
               <li><Link to="/login">Login</Link></li>
               <li><Link to="/signup">Sign Up</Link></li>
+            </ul>
+                : <ul className="nav__links">
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/order">Order</Link></li>
+              <li><Link to="/history">History</Link></li>
+              <li><Link className="nav__total" to="/cart">
+                Total: &#8358; {this.props.totalPrice}
+              </Link></li>
               <li className="nav-item nav-item-main notification hide-md">
                 <Link className="nav-link nav__notification active" to="/cart">
                   <i className="icon ion-ios-cart vi"></i>
                 </Link>
               </li>
             </ul>
+            }
             <ul className="nav__links--sm">
               <li>
-                <Link to="/" className="open" id="open">
+                <Link to="/" className="open" onClick={this.openSideNav}>
                   <i className="ion-android-menu"></i>
                 </Link></li>
             </ul>
@@ -39,3 +65,11 @@ export default class Navbar extends Component {
     );
   }
 }
+
+export const mapStateToProps = state => ({
+  ...state.cart,
+});
+
+export default connect(
+  mapStateToProps,
+)(Navbar);

@@ -1,7 +1,7 @@
 import * as type from '../containers/Login/actions/actionTypes';
 import stateUpdate from '../helpers/stateUpdate';
 
-const initialState = {
+export const initialState = {
   isLoading: false,
   error: null,
   success: null,

@@ -1,4 +1,6 @@
-export { default as Navbar } from './Navbar/Navbar';
-export { default as Hero } from './Hero/Hero';
-export { default as Card } from './Card/Card';
-export { default as Toast } from './Toast/Toast';
+export { default as Navbar } from './Navbar/Navbar.jsx';
+export { default as Hero } from './Hero/Hero.jsx';
+export { default as Card } from './Card/Card.jsx';
+export { default as SideNav } from './SideNav/SideNav.jsx';
+export { default as CartParent } from './Cart/CartParent.jsx';
+export { default as CartItem } from './Cart/CartItem.jsx';
