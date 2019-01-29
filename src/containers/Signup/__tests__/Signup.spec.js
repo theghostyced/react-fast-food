@@ -46,7 +46,11 @@ describe('Signup Component Test', () => {
       error: true,
       errorMessage: 'djakda',
     });
-    expect(wrapper.instance().componentDidUpdate()).toEqual(false);
+    const nextProps = {
+      error: true,
+      errorMessage: 'fhjadk',
+    };
+    expect(wrapper.instance().shouldComponentUpdate(nextProps)).toEqual(true);
   });
 
   it('should call the handleInput change', () => {

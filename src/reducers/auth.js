@@ -27,7 +27,7 @@ const updateLoginFailedState = (state, action) => stateUpdate(state, {
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case type.LOGIN_START:
-      return stateUpdate(initialState, loginStartState);
+      return stateUpdate(state, loginStartState);
 
     case type.LOGIN_FAILED:
       return updateLoginFailedState(state, action);

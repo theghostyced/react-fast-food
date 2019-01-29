@@ -28,6 +28,7 @@ export class OrderView extends Component {
       isAuthenicated: !!decodeToken(),
       totalPrice: 0,
       cart: localCart || [],
+      cartNum: localCart ? localCart.length : 0,
     };
   }
 
@@ -60,13 +61,15 @@ export class OrderView extends Component {
     const parentID = e.currentTarget.parentNode.parentNode.getAttribute('data-id');
     const parentDOM = document.querySelectorAll(`[data-id='${parentID}']`)[0];
     const inputDOM = parentDOM.getElementsByTagName('input')[0];
-    const price = parentDOM.querySelector('.cart__item-total-price').innerHTML.split(' ')[1];
+    const price = parseInt(parentDOM.querySelector('.cart__item-total-price').innerHTML.split(' ')[1], 10);
     const name = parentDOM.querySelector('.cart__item-name').innerHTML;
     const quantity = parseInt(inputDOM.value, 10);
+    const imageUrl = parentDOM.querySelector('.cart__image').firstChild.src;
     const cartItem = {
       price,
       quantity,
-      name
+      name,
+      imageUrl
     };
     if (quantity === 0 ) {
       swal({
@@ -77,8 +80,29 @@ export class OrderView extends Component {
       });
       return false;
     }
-    this.state.cart.push(cartItem);
+    const currCart = this.state.cart;
+    const orderIndex = currCart.findIndex(order => order.name === cartItem.name);
+
+    if (orderIndex === -1) {
+      this.state.cart.push(cartItem);
+      localStorage.setItem('cart', JSON.stringify(this.state.cart));
+      this.setState({
+        cartNum: this.state.cart.length,
+      });
+      inputDOM.value = 0;
+      swal({
+        timer: '2000',
+        title: 'Added To Cart',
+        text: `${name} has been added to the cart successfully`,
+        icon: 'success',
+      });
+      return;
+    }
+    this.state.cart[orderIndex].quantity += quantity;
     localStorage.setItem('cart', JSON.stringify(this.state.cart));
+    this.setState({
+      cartNum: this.state.cart.length,
+    });
     inputDOM.value = 0;
     swal({
       timer: '2000',
@@ -151,12 +175,18 @@ export class OrderView extends Component {
    * @returns {JSX} OrderView JSX
    */
   render() {
-    const { isAuthenicated } = this.state;
+    const { isAuthenicated, cartNum } = this.state;
     const { menus, isLoading } = this.props;
     return (
       <Fragment>
         <Navbar isAuthenicated={isAuthenicated}/>
-        <CartParent>
+        <CartParent
+          buttonText="View Cart"
+          displayCartNum={true}
+          cartNum={cartNum}
+          buttonText="View Cart"
+          cartPage={false}
+          title="Menu List">
           { isLoading
             ? <Loading isLoading={isLoading}/>
             : <Fragment>
@@ -168,6 +198,7 @@ export class OrderView extends Component {
             id={menu.id}
             increment={this.increment}
             decrement={this.decrement}
+            cartPage={false}
             addItemToCart={this.addItemToCart}/>)
           }
         </Fragment>
