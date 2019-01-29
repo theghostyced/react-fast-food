@@ -4,3 +4,4 @@ export { default as Card } from './Card/Card.jsx';
 export { default as SideNav } from './SideNav/SideNav.jsx';
 export { default as CartParent } from './Cart/CartParent.jsx';
 export { default as CartItem } from './Cart/CartItem.jsx';
+export { default as CartHistoryItem } from './Cart/CartHistoryItem.jsx';

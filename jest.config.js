@@ -12,8 +12,13 @@ module.exports = {
     '!src/components/shared/Navbar/*.jsx',
     '!src/components/shared/SideNav/*.jsx',
     '!src/containers/Order/*.jsx',
+    '!src/containers/History/*.jsx',
+    '!src/containers/CartContainer/*.jsx',
+    '!src/containers/Admin/*.jsx',
     '!src/routes/*.js',
+    '!src/helpers/dateFormatter.js',
     '!src/reducers/index.js',
+    '!src/reducers/cart.js',
     '!src/store/*.js',
   ],
   moduleNameMapper: {

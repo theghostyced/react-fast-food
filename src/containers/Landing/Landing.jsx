@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   Navbar,
   Hero,
@@ -7,11 +10,12 @@ import {
   SideNav,
 } from '../../components/shared';
 import decodeToken from '../../helpers/utils';
+import landingActions from './actions/landing';
 
 /**
  * @class
  */
-export default class Landing extends Component {
+export class Landing extends Component {
   /**
    *
    * @param {object} props
@@ -20,9 +24,13 @@ export default class Landing extends Component {
     super(props);
 
     this.state = {
-      menus: [1, 2, 3, 4, 5, 6],
       isAuthenicated: !!decodeToken(),
     };
+  }
+
+  static propTypes = {
+    fetchMenuDispatcher: PropTypes.func,
+    menus: PropTypes.array,
   }
 
   /**
@@ -30,13 +38,15 @@ export default class Landing extends Component {
    */
   componentDidMount() {
     document.body.style.backgroundColor = '#FFF';
+    this.props.fetchMenuDispatcher();
   }
 
   /**
    * @returns {JSX} Landing JSX
    */
   render() {
-    const { menus, isAuthenicated } = this.state;
+    const { isAuthenicated } = this.state;
+    const { menus } = this.props;
     return (
       <Fragment>
         <Navbar isAuthenicated={isAuthenicated}/>
@@ -47,7 +57,12 @@ export default class Landing extends Component {
               <h2 className="title__text title__text--dark">Menu Items</h2>
             </div>
             <div id="card" className="section__row three-col">
-              {menus.map((menu, i) => <Card key={i} />)}
+              {menus.map((menu, i) => <Card
+                key={i}
+                img={menu.img}
+                price={menu.price}
+                name={menu.name}
+                 />)}
             </div>
             <div className="section__row load-more mt-5">
               <Link
@@ -88,3 +103,17 @@ export default class Landing extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  ...state.landing,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(
+  landingActions,
+  dispatch
+);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Landing);

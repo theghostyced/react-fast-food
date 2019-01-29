@@ -14,6 +14,7 @@ describe('CartParent Component', () => {
     },
     readTime: 1,
     slug: 'dhhdh',
+    buttonHidden: false,
   };
 
   beforeEach(() => {
@@ -21,6 +22,13 @@ describe('CartParent Component', () => {
   });
 
   it('it should render a CartParent Component', () => {
+    expect(wrapper.length).toEqual(1);
+  });
+
+  it('it should render a CartParent Component', () => {
+    wrapper.setProps({
+      buttonHidden: true,
+    });
     expect(wrapper.length).toEqual(1);
   });
 });

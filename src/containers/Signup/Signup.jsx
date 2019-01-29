@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
+import { ClipLoader } from 'react-spinners';
 import swal from 'sweetalert';
 import './Signup.css';
 import foodTruck from '../../styles/img/food-truck.png';
@@ -19,7 +20,7 @@ export class Signup extends Component {
    */
   constructor(props) {
     super(props);
-    
+
     this.state = {
       isAuthenicated: !!decodeToken(),
     };
@@ -30,6 +31,7 @@ export class Signup extends Component {
     errorMessage: PropTypes.string,
     history: PropTypes.object,
     signupDispatcher: PropTypes.func,
+    isLoading: PropTypes.bool,
   }
 
   state = {
@@ -57,19 +59,20 @@ export class Signup extends Component {
   componentDidMount() {
     document.body.style.backgroundColor = '#580072';
     const isAuthenticated = decodeToken();
-    if (!isAuthenticated) this.props.history.push('/login');
+    if (isAuthenticated) this.props.history.push('/order');
   }
 
   /**
     * @description - Takes care of toast notifications when component updates
+    * @param {object} nextProps - The next/new props of the component
     * @returns {bool} - Boolean
     */
-  componentDidUpdate() {
+  shouldComponentUpdate(nextProps) {
     // eslint-disable-next-line max-len
-    if (this.props.error && this.props.errorMessage) {
+    if (nextProps.error !== this.props.error && nextProps.error && nextProps.errorMessage) {
       swal({
-        title: 'Login Failed',
-        text: this.props.errorMessage,
+        title: 'Signup Failed',
+        text: nextProps.errorMessage,
         icon: 'error',
       });
       return false;
@@ -148,7 +151,15 @@ export class Signup extends Component {
                   <button
                     type="submit"
                     className="button button--secondary"
-                  >Sign Up</button>
+                  >{
+                    !this.props.isLoading && 'Signup'
+                  }
+                  <ClipLoader
+                    sizeUnit={'px'}
+                    size={32}
+                    color={'#fff'}
+                    loading={this.props.isLoading}
+                  /></button>
               </div>
               <div className="input-account">
                   <p> Already have an account?

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { ClipLoader } from 'react-spinners';
 import swal from 'sweetalert';
 import './Login.css';
 import loginActions from './actions/auth';
@@ -26,6 +27,7 @@ export class Login extends Component {
     history: PropTypes.object,
     errorMessage: PropTypes.string,
     error: PropTypes.bool,
+    isLoading: PropTypes.bool,
   }
 
   /**
@@ -34,7 +36,7 @@ export class Login extends Component {
   componentDidMount() {
     document.body.style.backgroundColor = '#580072';
     const isAuthenticated = decodeToken();
-    if (!isAuthenticated) this.props.history.push('/login');
+    if (isAuthenticated) this.props.history.push('/order');
   }
 
   /**
@@ -53,12 +55,12 @@ export class Login extends Component {
     * @param {object} nextProps - The next/new props of the component
     * @returns {bool} - Boolean
     */
-  componentDidUpdate() {
+  shouldComponentUpdate(nextProps) {
     // eslint-disable-next-line max-len
-    if (this.props.error && this.props.errorMessage) {
+    if (nextProps.error !== this.props.error && nextProps.error && nextProps.errorMessage) {
       swal({
         title: 'Login Failed',
-        text: this.props.errorMessage,
+        text: nextProps.errorMessage,
         icon: 'error',
       });
       return false;
@@ -88,6 +90,7 @@ export class Login extends Component {
    * @returns {JSX} Login JSX
    */
   render() {
+    const { isLoading } = this.props;
     return (
       <Fragment>
         <div className="wrapper">
@@ -97,7 +100,7 @@ export class Login extends Component {
                 <Link to="/"><img src={foodTruck} /></Link>
               </div>
             </div>
-            <form onSubmit={this.handleSubmit}>
+            <form>
               <div className="input-group">
                 <span className="input__icon">
                   <i className="icon ion-ios-email vi"></i>
@@ -126,9 +129,20 @@ export class Login extends Component {
               </div>
               <div className="input-button">
                 <button
-                  type="submit"
                   className="button button--secondary"
-                >Login</button>
+                  onClick={this.handleSubmit}
+                >
+                {
+                  !this.props.isLoading
+                    ? 'Login'
+                    : <ClipLoader
+                  sizeUnit={'px'}
+                  size={32}
+                  color={'#fff'}
+                  loading={true}
+                />
+                }
+                </button>
               </div>
               <div className="input-account">
                 <p> Don't have an account? <Link to="/signup">Sign Up</Link></p>

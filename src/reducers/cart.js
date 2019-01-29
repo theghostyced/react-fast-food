@@ -13,6 +13,10 @@ if (localCart) {
 export const initialState = {
   totalPrice,
   cart: [],
+  isLoadinng: null,
+  response: null,
+  error: null,
+  errorMessage: null,
 };
 
 const updateOrderSuccessState = (state, action) => stateUpdate(state, {
@@ -24,6 +28,20 @@ const updateTotalSuccessState = (state, action) => stateUpdate(state, {
   totalPrice: action.payload.totalPrice,
 });
 
+const postOrderStart = state => stateUpdate(state, {
+  isLoadinng: true,
+});
+
+const postOrderFailed = (state, action) => stateUpdate(state, {
+  error: true,
+  errorMessage: action.payload.data.message,
+});
+
+const postOrderSuccess = (state, action) => stateUpdate(state, {
+  success: true,
+  response: action.payload,
+});
+
 const CartReducer = (state = initialState, action) => {
   switch (action.type) {
     case type.UPDATE_CART:
@@ -32,6 +50,12 @@ const CartReducer = (state = initialState, action) => {
     case type.UPDATE_CART_TOTAL:
       return updateTotalSuccessState(state, action);
 
+    case type.POST_ORDER_START:
+      return postOrderStart(state);
+    case type.POST_ORDER_FAILED:
+      return postOrderFailed(state, action);
+    case type.POST_ORDER_SUCCESS:
+      return postOrderSuccess(state, action);
     default:
       return state;
   }

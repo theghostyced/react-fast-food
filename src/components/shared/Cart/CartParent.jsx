@@ -8,6 +8,13 @@ import { Link } from 'react-router-dom';
 export default class CartParent extends Component {
   static propTypes = {
     children: PropTypes.any,
+    title: PropTypes.string,
+    buttonHidden: PropTypes.bool,
+    displayCartNum: PropTypes.bool,
+    cartNum: PropTypes.number,
+    buttonText: PropTypes.string,
+    buttonClicked: PropTypes.func,
+    cartPage: PropTypes.bool,
   }
 
   /**
@@ -17,13 +24,31 @@ export default class CartParent extends Component {
     return (
       <Fragment>
         <div className="cart order-cart">
-        <div className="cart__title title__text--dark">Menu List</div>
+        <div className="cart__title title__text--dark">{this.props.title}</div>
           <div className="overflow">
             { this.props.children }
           </div>
-          <Link to="/cart" className="cart__button button button--primary">View Cart</Link>
+          {
+            !this.props.buttonHidden
+            && !this.props.cartPage
+             && <Link to="/cart" className="cart__button button button--primary">
+            {this.props.buttonText} { this.props.displayCartNum
+                && this.props.cartNum > 0
+                && <span className="cart__number">{this.props.cartNum}</span> }
+            </Link>
+          }
+
+          {
+            this.props.cartPage
+            && <Link
+              to="#"
+              onClick={this.props.buttonClicked}
+              className="cart__button button button--primary">
+            {this.props.buttonText}
+            </Link>
+          }
         </div>
       </Fragment>
-    )
+    );
   }
 }

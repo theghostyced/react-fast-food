@@ -3,6 +3,8 @@ import {
   Landing,
   Signup,
   OrderView,
+  HistoryView,
+  CartContainer
 } from '../containers';
 
 
@@ -22,6 +24,14 @@ const routes = [
   {
     path: '/order',
     component: OrderView,
+  },
+  {
+    path: '/history',
+    component: HistoryView,
+  },
+  {
+    path: '/cart',
+    component: CartContainer,
   },
 ];
 

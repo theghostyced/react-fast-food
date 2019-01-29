@@ -10,6 +10,7 @@ export const initialState = {
 };
 
 const loginStartState = { isLoading: true };
+const laodingStop = { isLoading: false };
 
 const updateLoginSuccessState = (state, action) => stateUpdate(state, {
   isLoading: false,
@@ -27,13 +28,16 @@ const updateLoginFailedState = (state, action) => stateUpdate(state, {
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case type.LOGIN_START:
-      return stateUpdate(initialState, loginStartState);
+      return stateUpdate(state, loginStartState);
 
     case type.LOGIN_FAILED:
       return updateLoginFailedState(state, action);
 
     case type.LOGIN_SUCCESS:
       return updateLoginSuccessState(state, action);
+
+    case type.LOGIN_STOP:
+      return updateLoginSuccessState(state, laodingStop);
 
     default:
       return state;
