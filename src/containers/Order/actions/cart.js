@@ -25,7 +25,7 @@ const postSuccess = payload => ({
 });
 
 const postFailed = payload => ({
-  type: type.POST_ORDER_SUCCESS,
+  type: type.POST_ORDER_FAILED,
   payload,
 });
 
@@ -54,4 +54,7 @@ export default {
   placeOrderDispatcher,
   updateCart,
   updateCartTotal,
+  postStart,
+  postSuccess,
+  postFailed
 };
