@@ -41,7 +41,8 @@ export class Navbar extends Component {
             </ul>
                 : <ul className="nav__links">
               <li><Link to="/">Home</Link></li>
-              <li><Link to="/order">Order</Link></li>
+              <li><Link to="/order">Menu</Link></li>
+              <li><Link to="/cart">Menu</Link></li>
               <li><Link to="/history">History</Link></li>
               <li className="logout" onClick= {() => {
                 localStorage.removeItem('token');
@@ -53,11 +54,6 @@ export class Navbar extends Component {
               <li><Link className="nav__total" to="/cart">
                 Total: &#8358; {this.props.totalPrice}
               </Link></li>
-              <li className="nav-item nav-item-main notification hide-md">
-                <Link className="nav-link nav__notification active" to="/cart">
-                  <i className="icon ion-ios-cart vi"></i>
-                </Link>
-              </li>
             </ul>
             }
             <ul className="nav__links--sm">

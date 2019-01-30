@@ -5,6 +5,7 @@ import orderReducer from './order';
 import CartReducer from './cart';
 import HistoryReducer from './history';
 import LandingReducer from './landing';
+import AdminReducer from './admin';
 
 const rootReducers = combineReducers({
   auth: loginReducer,
@@ -13,6 +14,7 @@ const rootReducers = combineReducers({
   cart: CartReducer,
   history: HistoryReducer,
   landing: LandingReducer,
+  admin: AdminReducer
 });
 
 export default rootReducers;

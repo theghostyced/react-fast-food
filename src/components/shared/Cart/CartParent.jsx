@@ -15,6 +15,7 @@ export default class CartParent extends Component {
     buttonText: PropTypes.string,
     buttonClicked: PropTypes.func,
     cartPage: PropTypes.bool,
+    classes: PropTypes.string,
   }
 
   /**
@@ -23,7 +24,7 @@ export default class CartParent extends Component {
   render() {
     return (
       <Fragment>
-        <div className="cart order-cart">
+        <div className={`cart order-cart ${this.props.classes}`}>
         <div className="cart__title title__text--dark">{this.props.title}</div>
           <div className="overflow">
             { this.props.children }

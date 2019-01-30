@@ -4,7 +4,8 @@ import {
   Signup,
   OrderView,
   HistoryView,
-  CartContainer
+  CartContainer,
+  Admin
 } from '../containers';
 
 
@@ -33,6 +34,10 @@ const routes = [
     path: '/cart',
     component: CartContainer,
   },
+  {
+    path: '/admin-list',
+    component: Admin
+  }
 ];
 
 export default routes;
