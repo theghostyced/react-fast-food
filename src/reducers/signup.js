@@ -9,7 +9,8 @@ export const initialState = {
   response: null,
 };
 
-const signupStartState = { isLoading: true };
+const signupStartState = { isLoading: true, error: false };
+const laodingStop = { isLoading: false };
 
 const updateSignupSuccessState = (state, action) => stateUpdate(state, {
   isLoading: false,
@@ -34,6 +35,9 @@ const signupReducer = (state = initialState, action) => {
 
     case type.SIGNUP_SUCCESS:
       return updateSignupSuccessState(state, action);
+
+    case type.SIGNUP_STOP:
+      return updateSignupSuccessState(state, laodingStop);
 
     default:
       return state;

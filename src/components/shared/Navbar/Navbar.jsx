@@ -43,6 +43,13 @@ export class Navbar extends Component {
               <li><Link to="/">Home</Link></li>
               <li><Link to="/order">Order</Link></li>
               <li><Link to="/history">History</Link></li>
+              <li className="logout" onClick= {() => {
+                localStorage.removeItem('token');
+                window.location.replace('/');
+              }}
+              style={{ cursor: 'pointer' }}>
+                <Link to="#">Logout</Link>
+              </li>
               <li><Link className="nav__total" to="/cart">
                 Total: &#8358; {this.props.totalPrice}
               </Link></li>
