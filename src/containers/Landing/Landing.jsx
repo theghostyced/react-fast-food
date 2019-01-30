@@ -11,6 +11,7 @@ import {
 } from '../../components/shared';
 import decodeToken from '../../helpers/utils';
 import landingActions from './actions/landing';
+import Loading from '../../components/shared/Loading/Loading.jsx';
 
 /**
  * @class
@@ -31,6 +32,7 @@ export class Landing extends Component {
   static propTypes = {
     fetchMenuDispatcher: PropTypes.func,
     menus: PropTypes.array,
+    isLoading: PropTypes.bool,
   }
 
   /**
@@ -46,7 +48,7 @@ export class Landing extends Component {
    */
   render() {
     const { isAuthenicated } = this.state;
-    const { menus } = this.props;
+    const { menus, isLoading } = this.props;
     return (
       <Fragment>
         <Navbar isAuthenicated={isAuthenicated}/>
@@ -64,12 +66,19 @@ export class Landing extends Component {
                 name={menu.name}
                  />)}
             </div>
-            <div className="section__row load-more mt-5">
+            {
+              isLoading
+              && <Loading isLoading={isLoading}/>
+            }
+            {
+              !isLoading
+              && <div className="section__row load-more mt-5">
               <Link
                 to="/order"
                 className="button button--primary"
               >Show All Items</Link>
             </div>
+            }
           </div>
         </section>
         {/* {Hero Sub Section} */}
