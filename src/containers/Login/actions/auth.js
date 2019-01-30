@@ -15,15 +15,20 @@ const loginFailed = payload => ({
   payload,
 });
 
+const loadingStop = () => ({
+  type: type.LOGIN_STOP,
+});
+
 const loginDispatcher = (userData, history) => (dispatch) => {
   dispatch(loginStart());
   return axios.post(`${process.env.SERVER_API}/auth/login`, userData)
     .then((res) => {
       localStorage.setItem('token', res.data.token);
       dispatch(loginSuccess(res.data));
+      dispatch(loadingStop());
       history.push('/order');
     })
-    .catch((err) => { dispatch(loginFailed(err)); });
+    .catch((err) => { dispatch(loginFailed(err)); dispatch(loadingStop()); });
 };
 
 export default {
@@ -31,4 +36,5 @@ export default {
   loginStart,
   loginFailed,
   loginSuccess,
+  loadingStop
 };

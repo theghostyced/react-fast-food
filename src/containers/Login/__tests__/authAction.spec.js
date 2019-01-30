@@ -62,7 +62,7 @@ describe('Login Act{ions', () => {
 
     moxios.stubRequest(url, { status: 200, response: mockResponse });
     await loginActions.loginDispatcher(fakeUser, { push() {} })(dispatchFn);
-    expect(dispatchFn).toBeCalledTimes(2);
+    expect(dispatchFn).toBeCalledTimes(3);
     expect(dispatchFn).toBeCalledWith({ type: type.LOGIN_SUCCESS, payload: mockResponse });
   });
 
@@ -74,6 +74,6 @@ describe('Login Act{ions', () => {
 
     moxios.stubRequest(url, { status: 400 });
     await loginActions.loginDispatcher(fakeUser, { push() {} })(dispatchFn);
-    expect(dispatchFn).toBeCalledTimes(2);
+    expect(dispatchFn).toBeCalledTimes(3);
   });
 });
