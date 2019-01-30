@@ -1,11 +1,13 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import Landing from '../Landing.jsx';
+import { Landing } from '../Landing.jsx';
 
 describe('Landing Component', () => {
   let wrapper;
   const props = {
     isAuthenicated: true,
+    menus: [1, 2],
+    fetchMenuDispatcher: jest.fn()
   };
 
   beforeEach(() => {

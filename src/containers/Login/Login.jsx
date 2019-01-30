@@ -133,16 +133,14 @@ export class Login extends Component {
                   onClick={this.handleSubmit}
                 >
                 {
-                  !this.props.isLoading && 'Login'
-                }
-                {
-                  isLoading
-                  && <ClipLoader
-                    sizeUnit={'px'}
-                    size={32}
-                    color={'#fff'}
-                    loading={isLoading}
-                  />
+                  !this.props.isLoading
+                    ? 'Login'
+                    : <ClipLoader
+                  sizeUnit={'px'}
+                  size={32}
+                  color={'#fff'}
+                  loading={true}
+                />
                 }
                 </button>
               </div>
