@@ -9,7 +9,7 @@ export const initialState = {
   response: null,
 };
 
-const loginStartState = { isLoading: true };
+const loginStartState = { isLoading: true, error: false };
 const laodingStop = { isLoading: false };
 
 const updateLoginSuccessState = (state, action) => stateUpdate(state, {

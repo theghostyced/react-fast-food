@@ -8,6 +8,7 @@ describe('Login Reducer', () => {
     expect(loginReducer(defaultState, { type: type.LOGIN_START })).toEqual(
       updateObject(defaultState, {
         isLoading: true,
+        error: false
       }),
     );
   });
