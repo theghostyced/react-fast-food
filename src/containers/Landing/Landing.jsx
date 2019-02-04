@@ -64,6 +64,7 @@ export class Landing extends Component {
                 img={menu.img}
                 price={menu.price}
                 name={menu.name}
+                id={i}
                  />)}
             </div>
             {
@@ -101,9 +102,19 @@ export class Landing extends Component {
           </div>
         </section>
         <SideNav>
-          <Link to="/">Home</Link>
-          <Link to="/order">Orders</Link>
-          <Link to="/history">History</Link>
+          {
+            this.state.isAuthenicated
+              ? <Fragment>
+                  <Link to="/">Home</Link>
+                  <Link to="/order">Orders</Link>
+                  <Link to="/history">History</Link>
+                </Fragment>
+              : <Fragment>
+                  <Link to="/">Home</Link>
+                  <Link to="/login">Login</Link>
+                  <Link to="/signup">Signup</Link>
+                </Fragment>
+          }
         </SideNav>
         <footer className="bg-dark text--white text--center">
           <p>Copyrights @ 2018</p>

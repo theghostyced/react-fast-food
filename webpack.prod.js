@@ -1,12 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const merge = require('webpack-merge'); // Merge our common and dev config files.
-const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
 const common = require('./webpack.config');
-
-const APP_URL = path.resolve(__dirname, 'src');
 
 // SCSS test regex
 const scssTest = /\.scss$/;

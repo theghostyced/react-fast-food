@@ -147,6 +147,15 @@ export class CartContainer extends Component {
    */
   placeOrder = (e) => {
     e.preventDefault();
+    if (this.state.cart.length === 0) {
+      swal({
+        title: 'Order Failed',
+        text: 'No item in the cart! Did you forget to add an item?',
+        icon: 'error',
+        timer: '2000'
+      });
+      return;
+    }
     this.state.cart.map((item) => {
       const order = {
         mealName: item.name,

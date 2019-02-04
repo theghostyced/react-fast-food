@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import swal from 'sweetalert';
@@ -7,6 +8,8 @@ import {
   Navbar,
   CartParent,
   CartItem,
+  OrderCard,
+  SideNav
 } from '../../components/shared';
 import decodeToken from '../../helpers/utils';
 import orderActions from './actions/orderView';
@@ -186,6 +189,7 @@ export class OrderView extends Component {
           cartNum={cartNum}
           buttonText="View Cart"
           cartPage={false}
+          classes="hide-lg"
           title="Menu List">
           { isLoading
             ? <Loading isLoading={isLoading}/>
@@ -204,6 +208,38 @@ export class OrderView extends Component {
         </Fragment>
       }
         </CartParent>
+        <div id="card" className="order__page section__row three-col hide-md">
+          {
+            isLoading
+            ? <Loading isLoading={isLoading} />
+            : <Fragment>
+                <h4 className="text--center text--capitalise title__text title__text--dark">Menu Items</h4>
+                { menus.map((menu, i) => <OrderCard
+                  key={i}
+                  img={menu.img}
+                  price={menu.price}
+                  name={menu.name}
+                  id={i}
+                  state={this.state}
+                    />)}
+              </Fragment>
+          }
+        </div>
+        <SideNav>
+          {
+            this.state.isAuthenicated
+              ? <Fragment>
+                  <Link to="/">Home</Link>
+                  <Link to="/order">Orders</Link>
+                  <Link to="/history">History</Link>
+                </Fragment>
+              : <Fragment>
+                  <Link to="/">Home</Link>
+                  <Link to="/login">Login</Link>
+                  <Link to="/signup">Signup</Link>
+                </Fragment>
+          }
+        </SideNav>
       </Fragment>
     );
   }

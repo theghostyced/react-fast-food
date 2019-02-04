@@ -5,18 +5,14 @@ import PropTypes from 'prop-types';
 /**
  * @class
  */
-export class Card extends Component {
+export class OrderCard extends Component {
   /**
    * @returns {void}
    * @param {object} props
    */
   constructor(props) {
     super(props);
-    const localCart = JSON.parse(localStorage.getItem('cart'));
-    this.state = {
-      clicked: false,
-      cart: localCart || [],
-    };
+    this.state = props.state;
   }
 
   static propTypes = {
@@ -24,6 +20,7 @@ export class Card extends Component {
     img: PropTypes.any,
     name: PropTypes.any,
     id: PropTypes.number,
+    state: PropTypes.any,
   }
 
   /**
@@ -115,4 +112,4 @@ export class Card extends Component {
   }
 }
 
-export default Card;
+export default OrderCard;
